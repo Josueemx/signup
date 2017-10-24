@@ -19,13 +19,18 @@ import mx.itesm.signup.entity.User;
  * @author Morales
  */
 public class UserDAO {
+    
+    //NOTA: aqui cambiar de ser necesario y en Configuration Files/persistence.xml
+    String db_user = "root"; 
+    String db_password = "root";
+    
     public User findByUsername(final String username) {
         User user = null;
 
         try {
             Class.forName("com.mysql.jdbc.Driver").newInstance();
             Connection conn = DriverManager.getConnection(
-                "jdbc:mysql://localhost/signup?user=root&password=root");
+                "jdbc:mysql://localhost/signup?user="+db_user+"&password="+db_password);
             String sql = "SELECT * FROM user WHERE username=? ;";
             PreparedStatement pstmt = conn.prepareStatement(sql);
             pstmt.setString(1, username);
